@@ -147,10 +147,12 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    buildFileColumn(
-                        "assets/images/icon-facebook.svg", "", "sketch"),
-                    buildFileColumn(
-                        "assets/images/icon-instagram.svg", "", "sketch"),
+                    buildFileColumn("assets/images/icon-facebook.svg",
+                        "desktop ", "sketch"),
+                    const SizedBox(width: 10),
+                    buildFileColumn("assets/images/icon-instagram.svg",
+                        "mobile ", "sketch"),
+                    const SizedBox(width: 10),
                     buildFileColumn(
                         "assets/images/icon-hamburger.svg", "", "sketch"),
                   ],
@@ -163,7 +165,7 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
     );
   }
 
-  Column buildFileColumn(String src, String text, String small_text) {
+  Column buildFileColumn(String src, String text, String smallText) {
     return Column(
       children: [
         Container(
@@ -172,16 +174,16 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
               borderRadius: BorderRadius.circular(10)),
           width: 110,
           height: 110,
-          child: Image.asset(src),
+          // child: Image.asset(src),
         ),
         const SizedBox(height: 20),
         RichText(
           text: TextSpan(
               text: text,
-              style: TextStyle(color: Colors.black, fontSize: 16),
+              style: const TextStyle(color: Colors.black, fontSize: 16),
               children: [
                 TextSpan(
-                    text: small_text,
+                    text: smallText,
                     style: const TextStyle(
                         color: Colors.grey, fontWeight: FontWeight.w300))
               ]),
