@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class TeamFolderPage extends StatefulWidget {
   const TeamFolderPage({super.key});
@@ -8,8 +10,10 @@ class TeamFolderPage extends StatefulWidget {
 }
 
 class _TeamFolderPageState extends State<TeamFolderPage> {
+  double availableScreenWidth = 0;
   @override
   Widget build(BuildContext context) {
+    availableScreenWidth = MediaQuery.of(context).size.width - 50;
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: Column(
@@ -24,9 +28,10 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
+                const Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
                       "Riotters",
                       style: TextStyle(
@@ -36,7 +41,10 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
                     ),
                     Text(
                       "Team folder",
-                      style: TextStyle(fontSize: 17, color: Colors.grey),
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                      ),
                     )
                   ],
                 ),
@@ -52,7 +60,7 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Container(
@@ -69,9 +77,117 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
                 )
               ],
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                RichText(
+                  text: const TextSpan(
+                    text: "Storage ",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: [
+                      TextSpan(
+                          text: "9.1/10GB",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w100,
+                          )),
+                    ],
+                  ),
+                ),
+                const Text(
+                  "Upgrade",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Row(
+              children: [
+                buildFileSizeChart("SOURCES", .3, Colors.blue),
+                const SizedBox(width: 2),
+                buildFileSizeChart("DOCS", .25, Colors.pink),
+                const SizedBox(width: 2),
+                buildFileSizeChart("IMAGES", .20, Colors.yellow),
+                const SizedBox(width: 2),
+                buildFileSizeChart("", .23, Colors.grey),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const Divider(
+            height: 20,
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              children: [
+                const Text(
+                  "Recently updated",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(10)),
+                          width: 110,
+                          height: 110,
+                        )
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),
+    );
+  }
+
+  Column buildFileSizeChart(String title, double widthPercentage, Color color) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: availableScreenWidth * widthPercentage,
+          height: 4,
+          color: color,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
     );
   }
 }
