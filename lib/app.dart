@@ -41,13 +41,13 @@ class _AppState extends State<App> {
         page = FavoritesPage();
         break;
       case 2:
-        page = CartsPage();
+        page = const CartsPage();
         break;
       case 3:
-        page = OrdersPage();
+        page = const OrdersPage();
         break;
       case 4:
-        page = MenuPage();
+        page = const MenuPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -55,7 +55,7 @@ class _AppState extends State<App> {
     var mainArea = ColoredBox(
       color: colorScheme.surfaceVariant,
       child: AnimatedSwitcher(
-        duration: Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 100),
         child: page,
       ),
     );
@@ -71,7 +71,7 @@ class _AppState extends State<App> {
                 Expanded(child: mainArea),
                 SafeArea(
                   child: BottomNavigationBar(
-                    items: [
+                    items: const [
                       BottomNavigationBarItem(
                         icon: Icon(Icons.home),
                         label: 'Home',
@@ -81,16 +81,12 @@ class _AppState extends State<App> {
                         label: 'Favorites',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Favorites',
+                        icon: Icon(Icons.library_books_outlined),
+                        label: 'Orders',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Favorites',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Favorites',
+                        icon: Icon(Icons.menu),
+                        label: 'Menu',
                       ),
                     ],
                     currentIndex: selectedIndex,
@@ -109,7 +105,7 @@ class _AppState extends State<App> {
                 SafeArea(
                   child: NavigationRail(
                     extended: constraints.maxWidth >= 600,
-                    destinations: [
+                    destinations: const [
                       NavigationRailDestination(
                         icon: Icon(Icons.home),
                         label: Text('Home'),

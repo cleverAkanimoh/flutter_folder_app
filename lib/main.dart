@@ -15,7 +15,7 @@ class CommerceApp extends StatelessWidget {
       title: 'Flutter E-commerce',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const TeamFolderPage(),

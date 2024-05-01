@@ -1,6 +1,6 @@
+// ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class TeamFolderPage extends StatefulWidget {
   const TeamFolderPage({super.key});
@@ -11,6 +11,7 @@ class TeamFolderPage extends StatefulWidget {
 
 class _TeamFolderPageState extends State<TeamFolderPage> {
   double availableScreenWidth = 0;
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     availableScreenWidth = MediaQuery.of(context).size.width - 50;
@@ -19,7 +20,7 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
             alignment: Alignment.bottomCenter,
             height: 170,
             decoration: BoxDecoration(
@@ -149,16 +150,117 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
                   children: [
                     buildFileColumn("assets/images/icon-facebook.svg",
                         "desktop ", "sketch"),
-                    const SizedBox(width: 10),
+                    SizedBox(width: availableScreenWidth * .03),
                     buildFileColumn("assets/images/icon-instagram.svg",
                         "mobile ", "sketch"),
-                    const SizedBox(width: 10),
+                    SizedBox(width: availableScreenWidth * .03),
                     buildFileColumn(
                         "assets/images/icon-hamburger.svg", "", "sketch"),
                   ],
-                )
+                ),
+                const Divider(height: 60),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Projects",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "Create new",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 25),
+                buildFileRow("Chatbox"),
+                buildFileRow("TimeNote"),
+                buildFileRow("Something"),
+                buildFileRow("Other"),
               ],
             ),
+          )
+        ],
+      ),
+      floatingActionButton: Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white,
+              spreadRadius: 7,
+              blurRadius: 1,
+            )
+          ],
+        ),
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.blue,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+          child: const Icon(Icons.add),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        onTap: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        currentIndex: selectedIndex,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.watch_later_outlined),
+            label: "clock",
+            activeIcon: Icon(
+              Icons.access_alarms_outlined,
+            ),
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.add_box), label: "box"),
+        ],
+      ),
+    );
+  }
+
+  Container buildFileRow(String fileName) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+          color: Colors.grey.shade200, borderRadius: BorderRadius.circular(10)),
+      padding: const EdgeInsets.all(25),
+      // height: 65,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.folder,
+                color: Colors.blue,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                fileName,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+          const Icon(
+            Icons.more_vert_rounded,
+            color: Colors.grey,
           )
         ],
       ),
@@ -172,7 +274,7 @@ class _TeamFolderPageState extends State<TeamFolderPage> {
           decoration: BoxDecoration(
               color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(10)),
-          width: 110,
+          width: availableScreenWidth * .31,
           height: 110,
           // child: Image.asset(src),
         ),
