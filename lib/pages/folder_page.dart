@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class getFolderPage extends StatefulWidget {
@@ -131,56 +130,74 @@ class _getFolderPageState extends State<getFolderPage> {
           height: 20,
         ),
         Expanded(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            children: [
-              const Text(
-                "Recently updated",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  buildFileColumn(
-                      "assets/images/icon-facebook.svg", "desktop ", ".exe"),
-                  SizedBox(width: availableScreenWidth * .03),
-                  buildFileColumn(
-                      "assets/images/icon-instagram.svg", "mobile ", ".apk"),
-                  SizedBox(width: availableScreenWidth * .03),
-                  buildFileColumn(
-                      "assets/images/icon-hamburger.svg", "ios ", ".ios"),
-                ],
-              ),
-              const Divider(height: 60),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Projects",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+          child: ShaderMask(
+            shaderCallback: (bounds) {
+              return LinearGradient(
+                  tileMode: TileMode.mirror,
+                  end: Alignment.bottomCenter,
+                  begin: Alignment.topCenter,
+                  stops: const [
+                    0.7,
+                    1
+                  ],
+                  colors: [
+                    Colors.transparent,
+                    Colors.grey.shade100,
+                  ]).createShader(bounds);
+            },
+            blendMode: BlendMode.dstOut,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              children: [
+                const Text(
+                  "Recently updated",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    "Create new",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-              const SizedBox(height: 25),
-              buildFileRow("Chatbox"),
-              buildFileRow("TimeNote"),
-              buildFileRow("Something"),
-              buildFileRow("Other"),
-            ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    buildFileColumn(
+                        "assets/images/icon-facebook.svg", "desktop ", ".exe"),
+                    SizedBox(width: availableScreenWidth * .03),
+                    buildFileColumn(
+                        "assets/images/icon-instagram.svg", "mobile ", ".apk"),
+                    SizedBox(width: availableScreenWidth * .03),
+                    buildFileColumn(
+                        "assets/images/icon-hamburger.svg", "ios ", ".ios"),
+                  ],
+                ),
+                const Divider(height: 60),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Projects",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "Create new",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 25),
+                buildFileRow("Chatbox"),
+                buildFileRow("TimeNote"),
+                buildFileRow("Something"),
+                buildFileRow("Other"),
+                const SizedBox(height: 60),
+              ],
+            ),
           ),
         )
       ],
@@ -207,9 +224,10 @@ class _getFolderPageState extends State<getFolderPage> {
               Text(
                 fileName,
                 style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               )
             ],
           ),

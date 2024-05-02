@@ -96,8 +96,8 @@ class _getChatPageState extends State<getChatPage> {
                 tileMode: TileMode.mirror,
                 end: Alignment.bottomCenter,
                 begin: Alignment.topCenter,
-                stops: [
-                  0.6,
+                stops: const [
+                  0.65,
                   1
                 ],
                 colors: [
